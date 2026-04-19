@@ -21,3 +21,4 @@ Release notes and development milestones.
 - [2026-04-18 18:08] feat(collaboration): support real-time markdown slide notes editing
 - [2026-04-18 20:15] style(slides): enforce 8dp spatial rhythm and concentric nested card borders
 - [2026-04-19 09:23] test(generator): validate structured outline to slide deck transform pipeline
+- [2026-04-19 11:02] docs(overview): document slide generation schema and prompt customization
