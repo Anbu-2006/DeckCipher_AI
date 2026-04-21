@@ -45,3 +45,4 @@ Release notes and development milestones.
 - [2026-04-21 16:17] feat(deck): initialize pitch deck slide generation engine with structured JSON schema
 - [2026-04-21 16:47] feat(ai): integrate LLM reasoning prompt templates for VC narrative generation
 - [2026-04-21 17:16] feat(chart): embed responsive Chart.js financial projections and TAM/SAM/SOM breakdowns
+- [2026-04-21 17:46] perf(export): stream serverless Puppeteer PDF and PowerPoint deck exporter
