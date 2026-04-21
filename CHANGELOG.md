@@ -37,3 +37,4 @@ Release notes and development milestones.
 - [2026-04-21 12:18] feat(chart): embed responsive Chart.js financial projections and TAM/SAM/SOM breakdowns
 - [2026-04-21 12:48] perf(export): stream serverless Puppeteer PDF and PowerPoint deck exporter
 - [2026-04-21 13:18] fix(layout): prevent text overflow on 16:9 widescreen presentation slides
+- [2026-04-21 13:48] feat(themes): add 8 executive presentation themes with custom typography pairings
