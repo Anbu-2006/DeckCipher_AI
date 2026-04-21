@@ -34,3 +34,4 @@ Release notes and development milestones.
 - [2026-04-21 10:49] docs(overview): document slide generation schema and prompt customization
 - [2026-04-21 11:19] feat(deck): initialize pitch deck slide generation engine with structured JSON schema
 - [2026-04-21 11:49] feat(ai): integrate LLM reasoning prompt templates for VC narrative generation
+- [2026-04-21 12:18] feat(chart): embed responsive Chart.js financial projections and TAM/SAM/SOM breakdowns
