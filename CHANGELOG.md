@@ -70,3 +70,4 @@ Release notes and development milestones.
 - [2026-04-26 09:35] feat(themes): add 8 executive presentation themes with custom typography pairings
 - [2026-04-26 11:13] feat(collaboration): support real-time markdown slide notes editing
 - [2026-04-26 12:51] style(slides): enforce 8dp spatial rhythm and concentric nested card borders
+- [2026-04-26 14:29] test(generator): validate structured outline to slide deck transform pipeline
