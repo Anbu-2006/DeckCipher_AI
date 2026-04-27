@@ -76,3 +76,4 @@ Release notes and development milestones.
 - [2026-04-26 19:23] feat(ai): integrate LLM reasoning prompt templates for VC narrative generation
 - [2026-04-26 21:01] feat(chart): embed responsive Chart.js financial projections and TAM/SAM/SOM breakdowns
 - [2026-04-27 09:32] perf(export): stream serverless Puppeteer PDF and PowerPoint deck exporter
+- [2026-04-27 11:22] fix(layout): prevent text overflow on 16:9 widescreen presentation slides
