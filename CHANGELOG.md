@@ -99,3 +99,4 @@ Release notes and development milestones.
 - [2026-05-02 15:02] fix(layout): prevent text overflow on 16:9 widescreen presentation slides
 - [2026-05-02 15:50] feat(themes): add 8 executive presentation themes with custom typography pairings
 - [2026-05-02 16:38] feat(collaboration): support real-time markdown slide notes editing
+- [2026-05-02 17:26] style(slides): enforce 8dp spatial rhythm and concentric nested card borders
