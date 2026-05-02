@@ -102,3 +102,4 @@ Release notes and development milestones.
 - [2026-05-02 17:26] style(slides): enforce 8dp spatial rhythm and concentric nested card borders
 - [2026-05-02 18:15] test(generator): validate structured outline to slide deck transform pipeline
 - [2026-05-02 19:03] docs(overview): document slide generation schema and prompt customization
+- [2026-05-02 19:51] feat(deck): initialize pitch deck slide generation engine with structured JSON schema
