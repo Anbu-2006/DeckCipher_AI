@@ -123,3 +123,4 @@ Release notes and development milestones.
 - [2026-05-05 15:19] test(generator): validate structured outline to slide deck transform pipeline
 - [2026-05-05 15:53] docs(overview): document slide generation schema and prompt customization
 - [2026-05-05 16:27] feat(deck): initialize pitch deck slide generation engine with structured JSON schema
+- [2026-05-05 17:01] feat(ai): integrate LLM reasoning prompt templates for VC narrative generation
