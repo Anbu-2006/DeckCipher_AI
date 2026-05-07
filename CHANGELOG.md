@@ -138,3 +138,4 @@ Release notes and development milestones.
 - [2026-05-07 10:21] perf(export): stream serverless Puppeteer PDF and PowerPoint deck exporter
 - [2026-05-07 10:52] fix(layout): prevent text overflow on 16:9 widescreen presentation slides
 - [2026-05-07 11:22] feat(themes): add 8 executive presentation themes with custom typography pairings
+- [2026-05-07 11:52] feat(collaboration): support real-time markdown slide notes editing
