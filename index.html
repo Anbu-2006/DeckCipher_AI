@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DeckCipher AI — Enterprise Presentation Analytics powered by Advanced AI" />
+  <title>DeckCipher AI — Premium Analytics</title>
+
+  <!-- Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Icons: Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- External Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ───────── Settings Modal ───────── -->
+  <div id="settings-modal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-content glass-panel">
+      <div class="modal-header">
+        <h2 id="modal-title"><i class="ph ph-gear"></i> Configuration</h2>
+        <button id="close-modal-btn" class="icon-btn" aria-label="Close Settings"><i class="ph ph-x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="api-key-input">Custom API Key (Optional)</label>
+          <p class="form-help">DeckCipher uses a default system key so you can start analyzing immediately. If you prefer to use your own private API key, enter it below. Leave blank to revert to the default key.</p>
+          <div class="input-wrapper">
+            <i class="ph ph-key input-icon"></i>
+            <input type="password" id="api-key-input" placeholder="nvapi-..." spellcheck="false" autocomplete="off" />
+            <button id="toggle-visibility-btn" class="icon-btn inner-btn" aria-label="Toggle API Key Visibility">
+              <i class="ph ph-eye"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="save-settings-btn" class="btn btn-primary">Save Configuration</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────── Header / Navbar ───────── -->
+  <header class="navbar glass-panel">
+    <div class="container navbar-inner">
+      <div class="brand">
+        <div class="logo-icon"><i class="ph-fill ph-hexagon"></i></div>
+        <span class="logo-text">Deck<span class="accent">Cipher</span> <span class="badge">Enterprise</span></span>
+      </div>
+      <div class="nav-controls">
+        <button id="theme-toggle-btn" class="icon-btn" aria-label="Toggle Theme">
+          <i class="ph ph-sun"></i>
+        </button>
+        <button id="open-settings-btn" class="btn btn-secondary">
+          <i class="ph ph-gear"></i> Settings
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ───────── Main Application Layout ───────── -->
+  <div class="app-layout container">
+    
+    <!-- Left Sidebar: Local Vault -->
+    <aside class="sidebar glass-panel">
+      <div class="sidebar-header">
+        <h3><i class="ph ph-archive"></i> Local Vault</h3>
+      </div>
+      <div class="sidebar-body" id="vault-list">
+        <!-- Vault items will be injected here -->
+        <p class="empty-state">No previous analyses found.</p>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Control Panel: Upload & Persona -->
+      <section class="control-panel glass-panel">
+        <div class="panel-header">
+          <h2>Analysis Engine</h2>
+        </div>
+        
+        <div class="controls-grid">
+          <!-- Persona Selector -->
+          <div class="form-group">
+            <label for="persona-select">Analytical Lense (Persona)</label>
+            <div class="select-wrapper">
+              <i class="ph ph-user-focus select-icon"></i>
+              <select id="persona-select">
+                <option value="cfo">Chief Financial Officer (CFO)</option>
+                <option value="tech_lead">Technical Lead / CTO</option>
+                <option value="marketing">Marketing Director</option>
+                <option value="executive" selected>Executive Generalist</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Drop Zone -->
+          <div id="drop-zone" class="drop-zone" role="button" tabindex="0">
+            <i class="ph ph-upload-simple drop-icon"></i>
+            <div class="drop-text">
+              <span class="primary-text">Drag & drop your .pptx, .pdf, or .docx here</span>
+              <span class="secondary-text">or click to browse local files</span>
+            </div>
+            <input type="file" id="file-input" accept=".pptx, .pdf, .docx" class="sr-only" />
+          </div>
+
+          <!-- File Info & Action -->
+          <div id="file-info" class="file-info hidden">
+            <div class="file-details">
+              <i class="ph-fill ph-file-ppt"></i>
+              <div class="file-meta">
+                <span id="file-name" class="file-name">presentation.pptx</span>
+                <span id="file-size" class="file-size">2.4 MB</span>
+              </div>
+            </div>
+            <button id="analyze-btn" class="btn btn-primary btn-lg">
+              <i class="ph ph-sparkle"></i> Initiate Analysis
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Operations Terminal -->
+      <section class="terminal-section glass-panel">
+        <div class="terminal-header">
+          <span class="term-title"><i class="ph ph-terminal"></i> Operations Terminal</span>
+          <span class="term-status" id="term-status">Idle</span>
+        </div>
+        <div class="terminal-body" id="terminal-console">
+          <div class="term-line system">[System] DeckCipher Core v2.0.0 initialized.</div>
+          <div class="term-line system">[System] Awaiting file upload...</div>
+        </div>
+      </section>
+
+      <!-- Analysis Results -->
+      <section id="results-section" class="results-section hidden">
+        <div class="results-grid">
+          
+          <!-- Executive Summary -->
+          <article class="result-card glass-panel span-full">
+            <div class="card-header">
+              <h3><i class="ph ph-article"></i> Executive Summary</h3>
+              <span id="result-persona-badge" class="badge">Executive</span>
+            </div>
+            <div class="card-body">
+              <p id="summary-content" class="text-content"></p>
+            </div>
+          </article>
+
+          <!-- Action Items -->
+          <article class="result-card glass-panel">
+            <div class="card-header">
+              <h3><i class="ph ph-list-checks"></i> Strategic Action Items</h3>
+            </div>
+            <div class="card-body">
+              <ul id="actions-content" class="action-list"></ul>
+            </div>
+          </article>
+
+          <!-- Sentiment & Tone Analytics -->
+          <article class="result-card glass-panel">
+            <div class="card-header">
+              <h3><i class="ph ph-chart-bar"></i> Tone Analytics</h3>
+            </div>
+            <div class="card-body chart-container">
+              <canvas id="sentiment-chart"></canvas>
+            </div>
+            <div class="card-footer">
+              <p id="tone-summary" class="text-muted text-sm"></p>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- App Logic -->
+  <script src="app.js" type="module"></script>
+</body>
+</html>
